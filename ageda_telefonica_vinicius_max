@@ -2,10 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 #define a 300
+// Função MENU
+int cond(int condicao){
 
-int main() {
-
-	struct contato
+		fflush(stdin);
+        printf("\nDeseja cadastrar mais uma pessoa? Digite 1\nDeseja consultar uma pessoa? Digite 2\nDeseja alterar uma pessoa? Digite 3\nDeseja sair? Digite 4\n");
+        scanf("%d", &condicao);
+        return condicao;
+}
+// Estrutura dos dados dos contatos
+struct contato
 	{
 		char nome[a];
 		char email[a];
@@ -18,22 +24,26 @@ int main() {
 		char rg[a];
 		char genero[a];
 	};
-	struct contato contatos[10];
+
+	struct contato contatos[12];
+	//Estas foram definidas de forma global, para que possam ser utilizadas nos procedimentos e funções
+int main() {
 
     int id_l;
     int condicao=0;
     int id_a=0;
-    int id_c=0;
     int pos=0;
     int aux;
-    int aux2;
+
     printf("BEM VINDO A SUA AGENDA TELEFONICA!\n");
     printf("\n\n");
     printf("Para cadastrar um contato digite 1 \nPara consultar um contato digite 2 \nPara alterar algum contato digite 3\n");
     printf("\n");
     scanf("%d",&id_l);
     setbuf(stdin, NULL);
-    while(condicao<4) {
+    int aux5=0;
+    
+    while(aux5<4) {
 
     	switch (id_l) {
 	        case 1:
@@ -100,32 +110,16 @@ int main() {
 
 	                printf("\n\n");
 	                aux=pos+1;
-	                system("cls");
-	                printf("Voce eh o usuario: %d", aux);
+                    system("cls");
+	                printf("\n\nVoce eh o usuario: %d", aux);
 	                printf("\n\n\n");
+
 	            }
 	        break;
 
 	        case 2:
 	            {
-					printf("Digite o numero de usuario da pessoa:\n");
-					scanf("%d", &id_c);
-					system("cls");
-					aux2=id_c-1;
-
-					printf("Nome:%s\n", contatos[aux2].nome);
-					printf("Email:%s\n", contatos[aux2].email);
-					printf("Telefone:%s\n", contatos[aux2].num_tel);
-					printf("Endereço:%s\n", contatos[aux2].endereco);
-					printf("Estado:%s\n", contatos[aux2].estado);
-					printf("Cidade:%s\n", contatos[aux2].cidade);
-					printf("Data de nascimento:%s\n", contatos[aux2].data_nasc);
-					printf("CPF:%s\n", contatos[aux2].cpf);
-					printf("RG:%s\n", contatos[aux2].rg);
-					printf("Genero:%s\n", contatos[aux2].genero);
-					system("pause");
-					fflush(stdin);
-					
+	                leitura();
 	            }
 	        break;
 
@@ -168,23 +162,46 @@ int main() {
 	            }
 	        break;
 	    }
-        system("cls");
-		fflush(stdin);
-        printf("Deseja cadastrar mais uma pessoa? Digite 1\nDeseja consultar uma pessoa? Digite 2\nDeseja alterar uma pessoa? Digite 3\nDeseja sair? Digite 4\n");
-        scanf("%d", &condicao);
 
-        if(condicao==1){
-            id_l=condicao;
+
+        aux5=cond(condicao);
+
+
+        if(aux5==1){
+            id_l=aux5;
             pos=pos+1;
         }
-        if(condicao==2){
-            id_l=condicao;
+        if(aux5==2){
+            id_l=aux5;
         }
-        if(condicao==3){
-            id_l=condicao;
+        if(aux5==3){
+            id_l=aux5;
         }
 
 	}
 
     return 0 ;
+}
+//Procedimento de leitura de contato
+int leitura(){
+    int aux2=0;
+    int id_c=0;
+
+printf("Digite o numero de usuario da pessoa:\n");
+					scanf("%d", &id_c);
+					system("cls");
+					aux2=id_c-1;
+
+					printf("Nome:%s\n", contatos[aux2].nome);
+					printf("Email:%s\n", contatos[aux2].email);
+					printf("Telefone:%s\n", contatos[aux2].num_tel);
+					printf("Endereco:%s\n", contatos[aux2].endereco);
+					printf("Estado:%s\n", contatos[aux2].estado);
+					printf("Cidade:%s\n", contatos[aux2].cidade);
+					printf("Data de nascimento:%s\n", contatos[aux2].data_nasc);
+					printf("CPF:%s\n", contatos[aux2].cpf);
+					printf("RG:%s\n", contatos[aux2].rg);
+					printf("Genero:%s\n", contatos[aux2].genero);
+					system("pause");
+					fflush(stdin);
 }
